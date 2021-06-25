@@ -10,7 +10,7 @@ public class InstanceTriggerHandler {
             acc_List.add(newIns.Account__c);
 
         //associo ogni AccountId all'oggetto Account
-        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id =: acc_List])
+        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id IN: acc_List])
             acc_Map.put(a.Id, a);
 
         //recupero l'Account associato ad ogni Instance, modifico Total_Licenses__c e faccio l'update dell'Account
@@ -37,7 +37,7 @@ public class InstanceTriggerHandler {
         for(Instance__c newIns : new_Map.values())
             acc_List.add(newIns.Account__c);
 
-        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id =: acc_List])
+        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id IN: acc_List])
             acc_Map.put(a.Id, a);
         
         //recupero l'Account e l'Instance vecchia associati ad ogni Instance nuova, calcolo la differenza tra il vecchio e il nuovo valore di Licenses__c, modifico Total_Licenses__c e faccio l'update dell'Account
@@ -69,7 +69,7 @@ public class InstanceTriggerHandler {
         for(Instance__c newIns : new_List)
             acc_List.add(newIns.Account__c);
 
-        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id =: acc_List])
+        for(Account a : [SELECT Id, Total_Licenses__c FROM Account WHERE Id IN: acc_List])
             acc_Map.put(a.Id, a);
 
         for(Instance__c newIns : new_List){
